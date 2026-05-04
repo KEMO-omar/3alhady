@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم عا الهادي | Admin</title>
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #9d50bb;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .admin-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+        .logo-box img {
+            width: 150px;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+        h2 { color: var(--primary); margin-bottom: 1.5rem; }
+        .form-group { text-align: right; margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 0.5rem; color: #94a3b8; }
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+        }
+        .preview-box {
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px dashed var(--primary);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            text-align: right;
+        }
+        .preview-box span { color: var(--primary); font-weight: bold; }
+        button {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+        }
+        button:hover { transform: scale(1.02); filter: brightness(1.2); }
+        .status-msg { margin-top: 1rem; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="admin-card">
+    <div class="logo-box">
+        <img src="3a.svg" alt="عا الهادي"> </div>
+    <h2>لوحة التحكم اللحييبة</h2>
+    
+    <div class="form-group">
+        <label>المحافظة</label>
+        <select id="govSelect"></select>
+    </div>
+
+    <div class="form-group">
+        <label>ستايل الجدول</label>
+        <select id="styleSelect">
+            <option value="1">باتمان (1)</option>
+            <option value="2">سوبرمان (2)</option>
+            <option value="3">كيتي (3)</option>
+            <option value="4">اسبونج بوب (4)</option>
+        </select>
+    </div>
+
+    <div class="preview-box">
+        <div>اسم الصورة: <span id="imgNamePreview">---</span></div>
+        <div style="font-size: 0.8rem; margin-top: 5px;">الوصف: <span id="descPreview" style="color: #94a3b8;">---</span></div>
+    </div>
+
+    <button id="publishBtn">انشر يا مدلع 🚀</button>
+    <div id="status" class="status-msg"></div>
+</div>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>
+
