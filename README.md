@@ -51,8 +51,4 @@
 
 ---
 
-<div align="center">
-  <img src="https://kemo-omar.github.io/Kareem/13.png" width="150" alt="لوجو كريم">
-</div>
-
 <p align="center">جميع الحقوق محفوظة لموقع عا الهادي © 2026 | تطوير كريم عمر سيد</p>
