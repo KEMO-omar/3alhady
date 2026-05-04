@@ -3,175 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عا الهادي | جداول امتحانات الصف الأول الثانوي 2026</title>
+    <title>عا الهادي | جداول امتحانات 1 ثانوي 2026</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --soft-blue: #e0f2fe;
-            --main-accent: #0ea5e9;
-            --text-dark: #1e293b;
-            --card-bg: #ffffff;
+            --soft-bg: #f8fafc;
+            --main-blue: #00a8ff;
+            --accent-purple: #9c27b0;
+            --text-color: #1e293b;
         }
+
+        * { box-sizing: border-box; transition: all 0.3s ease; }
 
         body {
-            background-color: #f8fafc; /* خلفية فاتحة ومرحرحة */
-            color: var(--text-dark);
+            background-color: var(--soft-bg);
+            color: var(--text-color);
             font-family: 'Cairo', sans-serif;
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
         }
 
-        /* === Header رايق === */
+        /* Header */
         header {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 10px 5%;
-            position: sticky;
-            top: 0;
-            display: flex;
-            justify-content: center; /* سنترت اللوجو عشان الروقان */
-            align-items: center;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            z-index: 1000;
-        }
-
-        .logo-box img {
-            height: 60px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-        }
-
-        /* === Hero Section === */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
+            background: white;
+            padding: 20px 0;
             text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            position: sticky; top: 0; z-index: 1000;
         }
 
-        .hero-text h1 {
-            font-weight: 900;
-            color: var(--main-accent);
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+        .logo-box img { width: 160px; height: auto; }
+
+        .main-container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+
+        /* Hero */
+        .hero { text-align: center; margin-bottom: 50px; }
+        .hero h1 { font-size: 2.2rem; font-weight: 900; color: var(--main-blue); margin-bottom: 10px; }
+        .slogan-pill {
+            background: #e0f2fe; padding: 10px 25px; border-radius: 50px;
+            display: inline-block; font-size: 1rem; color: #0369a1; font-weight: bold;
         }
 
-        .slogan-box {
-            background: var(--soft-blue);
-            display: inline-block;
-            padding: 10px 25px;
-            border-radius: 50px;
-            color: #0369a1;
-            font-weight: bold;
-            margin-bottom: 30px;
+        /* Search */
+        .search-box {
+            width: 100%; max-width: 500px; display: block; margin: 0 auto 40px;
+            padding: 18px 25px; border-radius: 20px; border: 2px solid #cbd5e1;
+            font-family: 'Cairo'; font-size: 1.1rem; outline: none; text-align: center;
         }
+        .search-box:focus { border-color: var(--main-blue); box-shadow: 0 0 20px rgba(0, 168, 255, 0.1); }
 
-        /* === محرك البحث (الـ 27 محافظة) === */
-        .search-wrapper {
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        #govSearch {
-            width: 100%;
-            max-width: 500px;
-            padding: 15px 25px;
-            border-radius: 30px;
-            border: 2px solid var(--soft-blue);
-            font-size: 1.1rem;
-            font-family: 'Cairo';
-            outline: none;
-            transition: 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        }
-
-        #govSearch:focus {
-            border-color: var(--main-accent);
-            box-shadow: 0 10px 20px rgba(14, 165, 233, 0.1);
-        }
-
-        /* === عرض الجداول === */
-        .schedules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-        }
-
+        /* Schedule Card & Watermark كدسه */
         .schedule-card {
-            background: var(--card-bg);
-            border-radius: 25px;
-            overflow: hidden;
-            border: 1px solid #f1f5f9;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            transition: 0.3s;
+            background: white; border-radius: 30px; padding: 25px; margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; text-align: center;
         }
 
-        .schedule-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-        }
+        .card-header { margin-bottom: 20px; }
+        .card-header h3 { font-size: 1.8rem; margin: 0; color: #0f172a; }
+        .card-header span { color: var(--accent-purple); font-weight: bold; font-size: 0.9rem; }
 
-        .schedule-card .img-container {
-            background: #f1f5f9;
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .img-wrapper {
             position: relative;
-        }
-
-        .schedule-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .schedule-info {
-            padding: 20px;
-            background: white;
-        }
-
-        .schedule-info h3 {
-            margin: 0 0 10px;
-            font-size: 1.3rem;
-            color: #0f172a;
-        }
-
-        .btn-action {
+            cursor: pointer;
+            border-radius: 20px;
+            overflow: hidden;
             display: inline-block;
-            margin-top: 15px;
-            background: var(--main-accent);
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 12px;
+            width: 100%;
+        }
+
+        .img-wrapper img { width: 100%; display: block; }
+
+        /* العلامة المائية كدسه */
+        .img-wrapper::after {
+            content: "عا الهادي | 3alhady.com";
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 12px;
             font-weight: bold;
-            font-size: 0.9rem;
+            pointer-events: none;
+            backdrop-filter: blur(4px);
         }
 
-        /* === Footer === */
-        footer {
-            margin-top: 100px;
-            background: white;
-            padding: 50px 5%;
-            border-top: 1px solid #f1f5f9;
+        .img-wrapper:hover img { transform: scale(1.02); filter: brightness(0.95); }
+        .img-wrapper:hover::before {
+            content: "اضغط للتحميل المباشر 💾";
+            position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: var(--main-blue); color: white;
+            padding: 10px 20px; border-radius: 12px; z-index: 2; font-weight: bold;
         }
 
-        .legal-box {
-            background: #fff1f2;
-            color: #be123c;
-            padding: 20px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            max-width: 800px;
-            margin: 0 auto 30px;
+        /* Footer */
+        footer { background: #0f172a; color: #f8fafc; padding: 60px 20px; text-align: center; margin-top: 80px; }
+        .legal-msg {
+            background: rgba(248, 113, 113, 0.1); color: #f87171;
+            padding: 25px; border-radius: 20px; font-size: 0.9rem;
+            max-width: 800px; margin: 0 auto 40px; border: 1px solid rgba(248, 113, 113, 0.2);
+            line-height: 1.8; text-align: justify;
         }
-
-        .goal {
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: #334155;
+        .signature { font-weight: bold; color: var(--main-blue); margin-top: 20px; font-size: 1.1rem; }
+        
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.7rem; }
+            .schedule-card { padding: 15px; }
         }
     </style>
 </head>
@@ -179,31 +119,29 @@
 
     <header>
         <div class="logo-box">
-            <img src="https://raw.githubusercontent.com/username/repo/main/3a1.png" alt="عا الهادي">
+            <a href="index.html"><img src="3a1.png" alt="لوجو عا الهادي" onerror="this.src='https://kemo-omar.github.io/3alhady/3a1.png'"></a>
         </div>
     </header>
 
-    <div class="container">
-        <div class="hero-text">
-            <h1>جداول امتحاناتك.. عا الهادي كدسه</h1>
-            <div class="slogan-box">قسماً بالله ما تذاكر ولا تفتح كتاب إلا والجدول رايق كدسه.</div>
+    <div class="main-container">
+        <div class="hero">
+            <h1>جداول امتحاناتك بالملي.. عا الهادي كدسه</h1>
+            <div class="slogan-pill">قسماً بالله ما تذاكر ولا تفتح كتاب إلا والجدول رايق كدسه.</div>
         </div>
 
-        <div class="search-wrapper">
-            <input type="text" id="govSearch" placeholder="ابحث باسم محافظتك (مثلاً: الشرقية)...">
-        </div>
+        <input type="text" id="govSearch" class="search-box" placeholder="اكتب اسم محافظتك هنا.. انزل يا مدلع">
 
-        <div id="loader">جاري تجهيز الروقان...</div>
-        <div id="schedulesGrid" class="schedules-grid">
-            </div>
+        <div id="loader" style="text-align: center; color: var(--main-blue);">جاري سحب الروقان من السيرفر كدسه...</div>
+        <div id="schedulesGrid"></div>
     </div>
 
     <footer>
-        <div class="legal-box">
-            <strong>⚠️ إخلاء مسؤولية:</strong> الموقع للمساعدة فقط، ارجع لـ "موقع الوزارة" أو مدرستك للتأكد من الختم النهائي.. إحنا هنا عشان نروق عليك بس.
+        <div class="legal-msg">
+            <strong>⚠️ إخلاء مسؤولية قانوني:</strong> موقع "عا الهادي" هو مبادرة طلابية مستقلة تهدف لتيسير الوصول للجداول التعليمية وتنسيقها بشكل مريح للعين. نحن لا نمثل وزارة التربية والتعليم المصرية ولا ندعي الصفة الرسمية. يتم تجميع هذه الجداول من المصادر المتاحة، لذا يجب على كل طالب التأكد من "الجدول الورقي" المعتمد داخل مدرسته قبل موعد الامتحان بـ 48 ساعة على الأقل. الموقع غير مسؤول عن أي أخطاء مطبعية أو تغييرات مفاجئة في مواعيد الامتحانات تقرها الإدارات التعليمية.
         </div>
-        <p class="goal">﴿هدفي بوضوح: تخليصك من دوشة الجداول عشان تذاكر وإنت عا الهادي كدسه﴾</p>
-        <p style="color: #94a3b8; margin-top: 20px;">جميع الحقوق محفوظة لموقع عا الهادي © 2026</p>
+        <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 5px;">﴿هدفي بوضوح: تخليصك من دوشة الجداول عشان تذاكر وإنت عا الهادي كدسه﴾</p>
+        <div class="signature">برمجة وتطوير بواسطة: كريم عمر سيد 👨‍💻</div>
+        <p style="color: #64748b; font-size: 0.8rem; margin-top: 30px;">جميع الحقوق محفوظة لموقع عا الهادي © 2026</p>
     </footer>
 
     <script type="module">
@@ -222,54 +160,60 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        const grid = document.getElementById('schedulesGrid');
+        const loader = document.getElementById('loader');
+        let schedules = [];
 
-        const schedulesGrid = document.getElementById('schedulesGrid');
-        const govSearch = document.getElementById('govSearch');
-        let allSchedules = [];
-
-        async function fetchSchedules() {
+        async function loadData() {
             try {
                 const q = query(collection(db, "schedules"), orderBy("createdAt", "desc"));
-                const querySnapshot = await getDocs(q);
-                document.getElementById('loader').style.display = 'none';
-
-                querySnapshot.forEach((doc) => {
-                    allSchedules.push(doc.data());
-                });
-
-                renderSchedules(allSchedules);
-            } catch (e) {
-                console.error(e);
-            }
+                const snap = await getDocs(q);
+                loader.style.display = 'none';
+                snap.forEach(doc => schedules.push(doc.data()));
+                render(schedules);
+            } catch (e) { console.error(e); }
         }
 
-        function renderSchedules(data) {
-            schedulesGrid.innerHTML = '';
+        function render(data) {
+            grid.innerHTML = '';
             data.forEach(item => {
-                const card = `
+                const imgUrl = `https://kemo-omar.github.io/3alhady/images/${item.imageName}`;
+                
+                grid.innerHTML += `
                     <div class="schedule-card">
-                        <div class="img-container">
-                            <img src="images/${item.imageName}" alt="${item.fullDescription}" loading="lazy" onerror="this.src='https://raw.githubusercontent.com/username/repo/main/3a.png'">
-                        </div>
-                        <div class="schedule-info">
+                        <div class="card-header">
                             <h3>محافظة ${item.govName}</h3>
-                            <p style="font-size:0.8rem; color:#64748b">${item.styleName}</p>
-                            <a href="images/${item.imageName}" download class="btn-action">حفظ الصورة يا مدلع 💾</a>
+                            <span>ستايل التصميم: ${item.styleName}</span>
                         </div>
+                        <div class="img-wrapper" onclick="downloadImg('${imgUrl}', '${item.govName}')">
+                            <img src="${imgUrl}" 
+                                 alt="${item.fullDescription}" 
+                                 title="${item.fullDescription}" 
+                                 onerror="this.src='https://kemo-omar.github.io/3alhady/${item.imageName}'">
+                        </div>
+                        <p style="color:#94a3b8; font-size:0.8rem; margin-top:15px;">${item.fullDescription}</p>
                     </div>
                 `;
-                schedulesGrid.innerHTML += card;
             });
         }
 
-        // محرك البحث اللحييييب كدسه
-        govSearch.addEventListener('input', (e) => {
-            const term = e.target.value.trim().toLowerCase();
-            const filtered = allSchedules.filter(s => s.govName.includes(term));
-            renderSchedules(filtered);
+        // دالة التحميل المباشر كدسه
+        window.downloadImg = function(url, name) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `جدول_امتحانات_${name}_عا_الهادي.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        document.getElementById('govSearch').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = schedules.filter(s => s.govName.includes(term));
+            render(filtered);
         });
 
-        fetchSchedules();
+        loadData();
     </script>
 </body>
 </html>
