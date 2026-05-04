@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة تحكم عا الهادي | Admin</title>
+    <title>لوحة تحكم عا الهادي | انزل يا مدلع</title>
     <style>
         :root {
             --primary: #00d2ff;
@@ -11,7 +11,9 @@
             --bg: #0f172a;
             --card-bg: #1e293b;
             --text: #f8fafc;
+            --accent: #ff9800;
         }
+
         body {
             background-color: var(--bg);
             color: var(--text);
@@ -21,104 +23,204 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            padding: 20px;
         }
+
         .admin-card {
             background: var(--card-bg);
             padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            width: 90%;
-            max-width: 500px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 450px;
             border: 1px solid rgba(255,255,255,0.1);
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
+
+        .admin-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,210,255,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
         .logo-box img {
-            width: 150px;
+            width: 180px;
             margin-bottom: 1rem;
-            filter: drop-shadow(0 0 10px var(--primary));
+            filter: drop-shadow(0 0 15px var(--primary));
         }
-        h2 { color: var(--primary); margin-bottom: 1.5rem; }
-        .form-group { text-align: right; margin-bottom: 1rem; }
-        label { display: block; margin-bottom: 0.5rem; color: #94a3b8; }
+
+        h2 { 
+            color: var(--primary); 
+            margin-bottom: 0.5rem; 
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px rgba(0,210,255,0.3);
+        }
+
+        p.slogan {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            text-align: right;
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.6rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 0.9rem;
+            padding-right: 5px;
+        }
+
         select {
             width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid #334155;
+            padding: 14px;
+            border-radius: 12px;
+            border: 2px solid #334155;
             background: #0f172a;
             color: white;
             font-size: 1rem;
             outline: none;
+            cursor: pointer;
+            transition: border-color 0.3s;
         }
+
+        select:focus {
+            border-color: var(--primary);
+        }
+
         .preview-box {
-            background: rgba(0, 210, 255, 0.1);
-            border: 1px dashed var(--primary);
-            padding: 1rem;
-            border-radius: 10px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px dashed var(--secondary);
+            padding: 1.2rem;
+            border-radius: 15px;
             margin: 1.5rem 0;
             text-align: right;
+            transition: 0.3s;
         }
-        .preview-box span { color: var(--primary); font-weight: bold; }
+
+        .preview-box div {
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .preview-box span { 
+            color: var(--primary); 
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+        #descPreview {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            display: block;
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+
         button {
             width: 100%;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 16px;
+            border-radius: 15px;
             border: none;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+            transition: 0.4s;
+            box-shadow: 0 8px 20px rgba(0, 210, 255, 0.2);
         }
-        button:hover { transform: scale(1.02); filter: brightness(1.2); }
-        .status-msg { margin-top: 1rem; font-weight: bold; }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 210, 255, 0.4);
+            filter: brightness(1.1);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .status-msg {
+            margin-top: 1.2rem;
+            font-weight: bold;
+            min-height: 24px;
+        }
+
+        .loader {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
 
 <div class="admin-card">
     <div class="logo-box">
-        <img src="3a.svg" alt="عا الهادي"> </div>
-    <h2>لوحة التحكم اللحييبة</h2>
+        <img src="3a.svg" alt="عا الهادي">
+    </div>
+    <h2>لوحة التحكم</h2>
+    <p class="slogan">قسماً بالله ما تذاكر ولا تفتح كتاب إلا والجدول رايق كدسه.</p>
     
     <div class="form-group">
-        <label>المحافظة</label>
+        <label>اختر المحافظة</label>
         <select id="govSelect">
-    <option value="ق">القاهرة</option>
-    <option value="ج">الجيزة</option>
-    <option value="أ">الأسكندرية</option>
-    <option value="د">الدقهلية</option>
-    <option value="ش">الشرقية</option>
-    <option value="م">المنوفية</option>
-    <option value="ق">القليوبية</option>
-    <option value="ب">البحيرة</option>
-    <option value="غ">الغربية</option>
-    <option value="ب">بور سعيد</option>
-    <option value="د">دمياط</option>
-    <option value="إ">الإسماعيلية</option>
-    <option value="س">السويس</option>
-    <option value="ك">كفر الشيخ</option>
-    <option value="ف">الفيوم</option>
-    <option value="ب">بني سويف</option>
-    <option value="م">المنيا</option>
-    <option value="أ">أسيوط</option>
-    <option value="س">سوهاج</option>
-    <option value="ق">قنا</option>
-    <option value="أ">الأقصر</option>
-    <option value="أ">أسوان</option>
-    <option value="ب">البحر الأحمر</option>
-    <option value="و">الوادي الجديد</option>
-    <option value="م">مطروح</option>
-    <option value="ش">شمال سيناء</option>
-    <option value="ج">جنوب سيناء</option>
-</select>
-
+            <option value="ق">القاهرة</option>
+            <option value="ج">الجيزة</option>
+            <option value="أ">الأسكندرية</option>
+            <option value="د">الدقهلية</option>
+            <option value="ش">الشرقية</option>
+            <option value="م">المنوفية</option>
+            <option value="ق">القليوبية</option>
+            <option value="ب">البحيرة</option>
+            <option value="غ">الغربية</option>
+            <option value="ب">بور سعيد</option>
+            <option value="د">دمياط</option>
+            <option value="إ">الإسماعيلية</option>
+            <option value="س">السويس</option>
+            <option value="ك">كفر الشيخ</option>
+            <option value="ف">الفيوم</option>
+            <option value="ب">بني سويف</option>
+            <option value="م">المنيا</option>
+            <option value="أ">أسيوط</option>
+            <option value="س">سوهاج</option>
+            <option value="ق">قنا</option>
+            <option value="أ">الأقصر</option>
+            <option value="أ">أسوان</option>
+            <option value="ب">البحر الأحمر</option>
+            <option value="و">الوادي الجديد</option>
+            <option value="م">مطروح</option>
+            <option value="ش">شمال سيناء</option>
+            <option value="ج">جنوب سيناء</option>
+        </select>
     </div>
 
     <div class="form-group">
-        <label>ستايل الجدول</label>
+        <label>ستايل التصميم</label>
         <select id="styleSelect">
             <option value="1">باتمان (1)</option>
             <option value="2">سوبرمان (2)</option>
@@ -128,15 +230,101 @@
     </div>
 
     <div class="preview-box">
-        <div>اسم الصورة: <span id="imgNamePreview">---</span></div>
-        <div style="font-size: 0.8rem; margin-top: 5px;">الوصف: <span id="descPreview" style="color: #94a3b8;">---</span></div>
+        <div>اسم الملف: <span id="imgNamePreview">---</span></div>
+        <div>الوصف: <span id="descPreview">---</span></div>
     </div>
 
     <button id="publishBtn">انشر يا مدلع 🚀</button>
+    <div id="loader" class="loader"></div>
     <div id="status" class="status-msg"></div>
 </div>
 
-<script type="module" src="admin.js"></script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    // Firebase Configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCSgvi4tyeoQKSw-o8SZ_oFms0zfjgR6kU",
+        authDomain: "alhady.firebaseapp.com",
+        projectId: "alhady",
+        storageBucket: "alhady.firebasestorage.app",
+        messagingSenderId: "839424225673",
+        appId: "1:839424225673:web:4b68a4ad74e5a2526bf158",
+        measurementId: "G-5GE3K43796"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const govSelect = document.getElementById('govSelect');
+    const styleSelect = document.getElementById('styleSelect');
+    const imgPreview = document.getElementById('imgNamePreview');
+    const descPreview = document.getElementById('descPreview');
+    const publishBtn = document.getElementById('publishBtn');
+    const status = document.getElementById('status');
+    const loader = document.getElementById('loader');
+
+    const stylesMap = { "1": "باتمان", "2": "سوبرمان", "3": "كيتي", "4": "اسبونج بوب" };
+
+    // تحديث المعاينة الحية كدسه
+    function updateUI() {
+        const char = govSelect.value;
+        const govName = govSelect.options[govSelect.selectedIndex].text;
+        const styleNum = styleSelect.value;
+        const styleName = stylesMap[styleNum];
+
+        const fileName = `${char}${styleNum}.png`;
+        const description = `جدول امتحانات الصف الاول الثانوي الترم الثاني محافظه ${govName} 2026 ${styleName}`;
+
+        imgPreview.innerText = fileName;
+        descPreview.innerText = description;
+
+        return { fileName, govName, styleName, description };
+    }
+
+    govSelect.addEventListener('change', updateUI);
+    styleSelect.addEventListener('change', updateUI);
+    
+    // تشغيل أول مرة
+    updateUI();
+
+    // عملية النشر
+    publishBtn.addEventListener('click', async () => {
+        const data = updateUI();
+        
+        status.innerText = "";
+        loader.style.display = "block";
+        publishBtn.disabled = true;
+        publishBtn.style.opacity = "0.7";
+
+        try {
+            await addDoc(collection(db, "schedules"), {
+                imageName: data.fileName,
+                govName: data.govName,
+                styleName: data.styleName,
+                fullDescription: data.description,
+                createdAt: serverTimestamp()
+            });
+
+            status.style.color = "#4ade80";
+            status.innerText = "انطر أبلكاش! الجدول نزل يا مدلع كدسه ✅";
+            
+            // ريست بسيط بعد النجاح
+            setTimeout(() => { status.innerText = ""; }, 5000);
+
+        } catch (e) {
+            console.error("Error: ", e);
+            status.style.color = "#f87171";
+            status.innerText = "لي كدسه؟ حصل غلط في الفايرباز!";
+        } finally {
+            loader.style.display = "none";
+            publishBtn.disabled = false;
+            publishBtn.style.opacity = "1";
+        }
+    });
+</script>
+
 </body>
 </html>
-
