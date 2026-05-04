@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <link rel="icon" type="image/png" href="3a.png">
+
+<link rel="apple-touch-icon" href="3a.png">
+
+<link rel="shortcut icon" href="https://kemo-omar.github.io/3alhady/3a.png" type="image/x-icon">
+    <title>عا الهادي - جداول امتحانات 2026 لكل المحافظات في مكان واحد</title>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>عا الهادي | جداول امتحانات 1 ثانوي 2026</title>
@@ -221,20 +228,33 @@
 
     // دالة التحميل الذكية كدسه
     window.downloadImg = function(url, name) {
-        fetch(url)
-            .then(response => response.blob())
-            .then(blob => {
-                const blobUrl = window.URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = blobUrl;
-                link.download = `جدول_امتحانات_${name}_عا_الهادي.png`;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                window.URL.revokeObjectURL(blobUrl);
-            })
-            .catch(() => window.open(url, '_blank'));
-    }
+    fetch(url)
+        .then(response => {
+            // لو السيرفر رد بـ 404 (الملف مش موجود) كدسه
+            if (!response.ok) throw new Error('File not found');
+            return response.blob();
+        })
+        .then(blob => {
+            // التأكد إن الملف اللي راجع هو صورة فعلاً كدسه
+            if (!blob.type.startsWith('image/')) {
+                throw new Error('Not an image');
+            }
+            const blobUrl = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = blobUrl;
+            link.download = `جدول_امتحانات_${name}_عا_الهادي.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(blobUrl);
+        })
+        .catch(err => {
+            console.error(err);
+            // لو فشل، يفتح الرابط في صفحة جديدة عشان الطالب يشوف المشكلة فين
+            window.open(url, '_blank');
+        });
+}
+
 
     // تشغيل البحث كدسه
     searchInput.addEventListener('input', (e) => {
