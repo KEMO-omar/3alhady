@@ -34,7 +34,7 @@
 
 ### 📂 أبرز مشاريعي
 * **[موقع عا الهادي](https://kemo-omar.github.io/3alhady/):** منصة لعرض جداول الامتحانات بتنسيق رايق.
-* **[SOHOORNA](https://kemo-omar.github.io/SOHOORNA/):** تطبيق ويب لإدارة المشاريع الرقمية.
+* **[SOHOORNA](https://kemo-omar.github.io/SOHOORNA/):** تطبيق ويب لإدارة المشاريع الرقمية وتنسيق العمل.
 
 ---
 
@@ -44,16 +44,15 @@
   <a href="https://kemo-omar.github.io/Kareem/" target="_blank">
     <img src="https://img.shields.io/badge/Portfolio-00a8ff?style=flat-square&logo=browser&logoColor=white" alt="Portfolio">
   </a>
-  <a href="https://wa.me/your-number" target="_blank">
-    <img src="[https://img.shields.io/badge/WhatsApp-25D366?style=flat-square&logo=whatsapp&logoColor=white](https://wa.me/201101258549)" alt="WhatsApp">
+  <a href="https://wa.me/201101258549" target="_blank">
+    <img src="https://img.shields.io/badge/WhatsApp-25D366?style=flat-square&logo=whatsapp&logoColor=white" alt="WhatsApp">
   </a>
 </p>
 
 ---
 
 <div align="center">
-  <img src="https://kemo-omar.github.io/Kareem/13.png" alt="Kareem's GitHub Stats" />
+  <img src="https://github-readme-stats.vercel.app/api?username=kemo-omar&show_icons=true&theme=tokyonight&hide_border=true" alt="Kareem's GitHub Stats" />
 </div>
 
 <p align="center">جميع الحقوق محفوظة لموقع عا الهادي © 2026 | تطوير كريم عمر سيد</p>
-
