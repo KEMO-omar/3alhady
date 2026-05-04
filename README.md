@@ -53,7 +53,7 @@
 ---
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=kemo-omar&show_icons=true&theme=tokyonight" alt="Kareem's GitHub Stats" />
+  <img src="https://kemo-omar.github.io/Kareem/13.png" alt="Kareem's GitHub Stats" />
 </div>
 
 <p align="center">جميع الحقوق محفوظة لموقع عا الهادي © 2026 | تطوير كريم عمر سيد</p>
