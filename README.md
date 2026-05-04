@@ -39,14 +39,13 @@
 ---
 
 ### 🌐 تواصل معايا
-بما إني غيرت بياناتي القريبة، تقدر تلاقيني هنا دايماً:
 
 <p align="left">
   <a href="https://kemo-omar.github.io/Kareem/" target="_blank">
     <img src="https://img.shields.io/badge/Portfolio-00a8ff?style=flat-square&logo=browser&logoColor=white" alt="Portfolio">
   </a>
   <a href="https://wa.me/your-number" target="_blank">
-    <img src="https://img.shields.io/badge/WhatsApp-25D366?style=flat-square&logo=whatsapp&logoColor=white" alt="WhatsApp">
+    <img src="[https://img.shields.io/badge/WhatsApp-25D366?style=flat-square&logo=whatsapp&logoColor=white](https://wa.me/201101258549)" alt="WhatsApp">
   </a>
 </p>
 
