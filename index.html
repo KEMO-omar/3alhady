@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>عا الهادي | جداول امتحانات 1 ثانوي 2026</title>
+    <meta name="description" content="موقع عا الهادي - المنصة الأولى لعرض جداول امتحانات الصف الأول والثاني الثانوي 2026 بجميع المحافظات بتنسيق مريح للعين وتحميل مباشر. برمجة كريم عمر سيد.">
+
+<meta name="keywords" content="جداول امتحانات 2026, الصف الأول الثانوي, الصف الثاني الثانوي, عا الهادي, كريم عمر سيد, جداول امتحانات القاهرة, الجيزة, الإسكندرية, الدقهلية, الشرقية, المنوفية, القليوبية, البحيرة, الغربية, بور سعيد, دمياط, الإسماعيلية, السويس, كفر الشيخ, الفيوم, بني سويف, المنيا, أسيوط, سوهاج, قنا, الأقصر, أسوان, البحر الأحمر, الوادي الجديد, مطروح, شمال سيناء, جنوب سيناء, تحميل جداول الامتحانات, وزارة التربية والتعليم">
+
+<meta property="og:title" content="عا الهادي | جداول امتحاناتك بالملي">
+<meta property="og:description" content="ذاكر وإنت مطمن.. جداول امتحانات 2026 لكل المحافظات في مكان واحد.">
+<meta property="og:image" content="3a.png">
+<meta property="og:url" content="https://kemo-omar.github.io/3alhady/">
+<meta name="twitter:card" content="summary_large_image">
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 
@@ -76,7 +85,7 @@
 
         /* العلامة المائية كدسه */
         .img-wrapper::after {
-            content: "عا الهادي | 3alhady.com";
+            content: "عا الهادي | kemo-omar.3alhady ";
             position: absolute;
             bottom: 15px;
             left: 15px;
@@ -92,7 +101,7 @@
 
         .img-wrapper:hover img { transform: scale(1.02); filter: brightness(0.95); }
         .img-wrapper:hover::before {
-            content: "اضغط للتحميل المباشر 💾";
+            content: "اضغط للتحميل";
             position: absolute;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
             background: var(--main-blue); color: white;
@@ -198,22 +207,26 @@
         }
 
         // دالة التحميل المباشر كدسه
-        window.downloadImg = function(url, name) {
+    window.downloadImg = function(url, name) {
+    // محاولة التحميل بطريقة الـ Fetch عشان نتفادى حوار الـ CORS كدسه
+    fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+            const blobUrl = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
-            link.href = url;
+            link.href = blobUrl;
             link.download = `جدول_امتحانات_${name}_عا_الهادي.png`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-        }
-
-        document.getElementById('govSearch').addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            const filtered = schedules.filter(s => s.govName.includes(term));
-            render(filtered);
+            window.URL.revokeObjectURL(blobUrl);
+        })
+        .catch(() => {
+            // لو الفيتش فشل (بسبب السكيورتي)، افتح الصورة في صفحة جديدة كدسه
+            window.open(url, '_blank');
         });
+}
 
-        loadData();
     </script>
 </body>
 </html>
