@@ -154,79 +154,99 @@
     </footer>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyCSgvi4tyeoQKSw-o8SZ_oFms0zfjgR6kU",
-            authDomain: "alhady.firebaseapp.com",
-            projectId: "alhady",
-            storageBucket: "alhady.firebasestorage.app",
-            messagingSenderId: "839424225673",
-            appId: "1:839424225673:web:4b68a4ad74e5a2526bf158",
-            measurementId: "G-5GE3K43796"
-        };
+    const firebaseConfig = {
+        apiKey: "AIzaSyCSgvi4tyeoQKSw-o8SZ_oFms0zfjgR6kU",
+        authDomain: "alhady.firebaseapp.com",
+        projectId: "alhady",
+        storageBucket: "alhady.firebasestorage.app",
+        messagingSenderId: "839424225673",
+        appId: "1:839424225673:web:4b68a4ad74e5a2526bf158",
+        measurementId: "G-5GE3K43796"
+    };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const grid = document.getElementById('schedulesGrid');
-        const loader = document.getElementById('loader');
-        let schedules = [];
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const grid = document.getElementById('schedulesGrid');
+    const loader = document.getElementById('loader');
+    const searchInput = document.getElementById('govSearch'); // عرفنا خانة البحث كدسه
+    let schedules = [];
 
-        async function loadData() {
-            try {
-                const q = query(collection(db, "schedules"), orderBy("createdAt", "desc"));
-                const snap = await getDocs(q);
-                loader.style.display = 'none';
-                snap.forEach(doc => schedules.push(doc.data()));
-                render(schedules);
-            } catch (e) { console.error(e); }
+    // دالة التحميل من فايرباز
+    async function loadData() {
+        try {
+            const q = query(collection(db, "schedules"), orderBy("createdAt", "desc"));
+            const snap = await getDocs(q);
+            loader.style.display = 'none';
+            schedules = []; // تصفية المصفوفة قبل التعبئة
+            snap.forEach(doc => schedules.push(doc.data()));
+            render(schedules);
+        } catch (e) { 
+            console.error(e);
+            loader.innerText = "في مشكلة في التحميل كدسه.. جرب رفرش!";
         }
+    }
 
-        function render(data) {
-            grid.innerHTML = '';
-            data.forEach(item => {
-                const imgUrl = `https://kemo-omar.github.io/3alhady/images/${item.imageName}`;
-                
-                grid.innerHTML += `
-                    <div class="schedule-card">
-                        <div class="card-header">
-                            <h3>محافظة ${item.govName}</h3>
-                            <span>ستايل التصميم: ${item.styleName}</span>
-                        </div>
-                        <div class="img-wrapper" onclick="downloadImg('${imgUrl}', '${item.govName}')">
-                            <img src="${imgUrl}" 
-                                 alt="${item.fullDescription}" 
-                                 title="${item.fullDescription}" 
-                                 onerror="this.src='https://kemo-omar.github.io/3alhady/${item.imageName}'">
-                        </div>
-                        <p style="color:#94a3b8; font-size:0.8rem; margin-top:15px;">${item.fullDescription}</p>
+    // دالة العرض في الصفحة
+    function render(data) {
+        grid.innerHTML = '';
+        if (data.length === 0) {
+            grid.innerHTML = '<p style="text-align:center; color:#94a3b8;">مفيش جداول بالاسم ده كدسه..</p>';
+            return;
+        }
+        data.forEach(item => {
+            const imgUrl = `https://kemo-omar.github.io/3alhady/images/${item.imageName}`;
+            const fallbackUrl = `https://kemo-omar.github.io/3alhady/${item.imageName}`;
+            
+            grid.innerHTML += `
+                <div class="schedule-card">
+                    <div class="card-header">
+                        <h3>محافظة ${item.govName}</h3>
+                        <span>ستايل: ${item.styleName}</span>
                     </div>
-                `;
-            });
-        }
-
-        // دالة التحميل المباشر كدسه
-    window.downloadImg = function(url, name) {
-    // محاولة التحميل بطريقة الـ Fetch عشان نتفادى حوار الـ CORS كدسه
-    fetch(url)
-        .then(response => response.blob())
-        .then(blob => {
-            const blobUrl = window.URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = blobUrl;
-            link.download = `جدول_امتحانات_${name}_عا_الهادي.png`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            window.URL.revokeObjectURL(blobUrl);
-        })
-        .catch(() => {
-            // لو الفيتش فشل (بسبب السكيورتي)، افتح الصورة في صفحة جديدة كدسه
-            window.open(url, '_blank');
+                    <div class="img-wrapper" onclick="window.downloadImg('${imgUrl}', '${item.govName}')">
+                        <img src="${imgUrl}" 
+                             alt="${item.fullDescription}" 
+                             title="${item.fullDescription}" 
+                             loading="lazy"
+                             onerror="this.onerror=null; this.src='${fallbackUrl}'">
+                    </div>
+                    <p style="color:#94a3b8; font-size:0.85rem; margin-top:15px; font-weight:bold;">${item.fullDescription}</p>
+                </div>
+            `;
         });
-}
+    }
 
-    </script>
+    // دالة التحميل الذكية كدسه
+    window.downloadImg = function(url, name) {
+        fetch(url)
+            .then(response => response.blob())
+            .then(blob => {
+                const blobUrl = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = blobUrl;
+                link.download = `جدول_امتحانات_${name}_عا_الهادي.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(blobUrl);
+            })
+            .catch(() => window.open(url, '_blank'));
+    }
+
+    // تشغيل البحث كدسه
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.trim().toLowerCase();
+        const filtered = schedules.filter(s => s.govName.includes(term));
+        render(filtered);
+    });
+
+    // تشغيل تحميل البيانات فور فتح الموقع
+    loadData();
+
+</script>
+
 </body>
 </html>
