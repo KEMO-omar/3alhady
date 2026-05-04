@@ -236,7 +236,7 @@
         })
         .then(blob => {
             // التأكد إن الملف اللي راجع هو صورة فعلاً كدسه
-            if (!blob.type.startsWith('image/')) {
+            if (!blob.type.startsWith('')) {
                 throw new Error('Not an image');
             }
             const blobUrl = window.URL.createObjectURL(blob);
