@@ -402,13 +402,17 @@
             <strong>⚠️ إخلاء مسؤولية قانوني:</strong> موقع "عا الهادي" هو مبادرة طلابية مستقلة تهدف لتيسير الوصول للجداول التعليمية وتنسيقها بشكل مريح للعين. نحن لا نمثل وزارة التربية والتعليم المصرية ولا ندعي الصفة الرسمية. يتم تجميع هذه الجداول من المصادر المتاحة، لذا يجب على كل طالب التأكد من "الجدول الورقي" المعتمد داخل مدرسته قبل موعد الامتحان بـ 48 ساعة على الأقل. الموقع غير مسؤول عن أي أخطاء مطبعية أو تغييرات مفاجئة في مواعيد الامتحانات تقرها الإدارات التعليمية.
         </div>
         <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 5px;">﴿هدفي بوضوح: تخليصك من دوشة الجداول عشان تذاكر وإنت عا الهادي كدسه﴾</p>
+       <p style="color: #main-blue; font-weight: bold; margin-top: 20px;">
+    🔥 دخل الموقع ده <span id="viewCountDisplay">...</span> بطل لحد دلوقتي كدسه
+       </p>
+
         <div class="signature">برمجة وتطوير بواسطة: كريم عمر سيد 👨‍💻</div>
         <p style="color: #64748b; font-size: 0.8rem; margin-top: 30px;">جميع الحقوق محفوظة لموقع عا الهادي © 2026</p>
     </footer>
 
-    <script type="module">
+<script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getFirestore, collection, getDocs, query, orderBy, doc, updateDoc, getDoc, increment, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyCSgvi4tyeoQKSw-o8SZ_oFms0zfjgR6kU",
@@ -422,6 +426,25 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+
+    // --- دالة عد الزيارات كدسه (الجديدة) ---
+    async function trackVisits() {
+        const statsRef = doc(db, "stats", "visitorCount");
+        try {
+            await updateDoc(statsRef, { views: increment(1) });
+            const snap = await getDoc(statsRef);
+            if (snap.exists()) {
+                const countDisplay = document.getElementById('viewCountDisplay');
+                if(countDisplay) countDisplay.innerText = snap.data().views;
+            }
+        } catch (e) {
+            await setDoc(statsRef, { views: 1 });
+            const countDisplay = document.getElementById('viewCountDisplay');
+            if(countDisplay) countDisplay.innerText = "1";
+        }
+    }
+    // --------------------------------------
+
     const grid = document.getElementById('schedulesGrid');
     const loader = document.getElementById('loader');
     const searchInput = document.getElementById('govSearch'); // عرفنا خانة البحث كدسه
@@ -474,44 +497,42 @@
 
     // دالة التحميل الذكية كدسه
     window.downloadImg = function(url, name) {
-    const img = new Image();
-    img.crossOrigin = "anonymous"; // عشان نتفادى مشاكل الـ CORS كدسه
-    img.src = url;
-    
-    img.onload = function() {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        img.crossOrigin = "anonymous"; // عشان نتفادى مشاكل الـ CORS كدسه
+        img.src = url;
         
-        // ضبط أبعاد الكانفاس لتناسب الصورة الأصلية
-        canvas.width = img.width;
-        canvas.height = img.height;
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // ضبط أبعاد الكانفاس لتناسب الصورة الأصلية
+            canvas.width = img.width;
+            canvas.height = img.height;
+            
+            // رسم الصورة الأصلية
+            ctx.drawImage(img, 0, 0);
+            
+            // إعدادات العلامة المائية كدسه
+            const fontSize = Math.floor(canvas.width / 40); // حجم الخط متناسق مع حجم الصورة
+            ctx.font = `bold ${fontSize}px Cairo`;
+            ctx.fillStyle = "rgba(255, 255, 255, 0.7)"; // لون أبيض شفاف
+            ctx.textAlign = "left";
+            
+            // رسم النص (العلامة المائية) في الركن تحت عالشمال
+            ctx.fillText("عا الهادي | kemo-omar.3alhady", 20, canvas.height - 20);
+            
+            // تنفيذ التحميل كدسه
+            const link = document.createElement('a');
+            link.download = `جدول_${name}_عا_الهادي.png`;
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        };
         
-        // رسم الصورة الأصلية
-        ctx.drawImage(img, 0, 0);
-        
-        // إعدادات العلامة المائية كدسه
-        const fontSize = Math.floor(canvas.width / 40); // حجم الخط متناسق مع حجم الصورة
-        ctx.font = `bold ${fontSize}px Cairo`;
-        ctx.fillStyle = "rgba(255, 255, 255, 0.7)"; // لون أبيض شفاف
-        ctx.textAlign = "left";
-        
-        // رسم النص (العلامة المائية) في الركن تحت عالشمال
-        ctx.fillText("عا الهادي | kemo-omar.3alhady", 20, canvas.height - 20);
-        
-        // تنفيذ التحميل كدسه
-        const link = document.createElement('a');
-        link.download = `جدول_${name}_عا_الهادي.png`;
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-    };
-    
-    img.onerror = function() {
-        // لو حصل مشكلة في الرسم، حمل الصورة العادية كدسه
-        window.open(url, '_blank');
-    };
-}
-
-
+        img.onerror = function() {
+            // لو حصل مشكلة في الرسم، حمل الصورة العادية كدسه
+            window.open(url, '_blank');
+        };
+    }
 
     // تشغيل البحث كدسه
     searchInput.addEventListener('input', (e) => {
@@ -521,6 +542,7 @@
     });
 
     // تشغيل تحميل البيانات فور فتح الموقع
+    trackVisits(); // تشغيل عداد الزيارات كدسه
     loadData();
 
 </script>
