@@ -270,100 +270,116 @@
     </script>
       
    <style>
-    :root {
-        --soft-bg: #f8fafc;
-        --main-blue: #00a8ff;
-        --accent-purple: #9c27b0;
-        --text-color: #1e293b;
-        --card-bg: white;
-    }
+        :root {
+            --soft-bg: #f8fafc;
+            --main-blue: #00a8ff;
+            --accent-purple: #9c27b0;
+            --text-color: #1e293b;
+        }
 
-    /* Dark Mode Variables */
-    body.dark-mode {
-        --soft-bg: #0f172a;
-        --text-color: #f8fafc;
-        --card-bg: #1e293b;
-    }
+        * { box-sizing: border-box; transition: all 0.3s ease; }
 
-    * { box-sizing: border-box; transition: all 0.3s ease; }
+        body {
+            background-color: var(--soft-bg);
+            color: var(--text-color);
+            font-family: 'Cairo', sans-serif;
+            margin: 0; padding: 0;
+        }
 
-    body {
-        background-color: var(--soft-bg);
-        color: var(--text-color);
-        font-family: 'Cairo', sans-serif;
-        margin: 0; padding: 0;
-    }
+        /* Header */
+        header {
+            background: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            position: sticky; top: 0; z-index: 1000;
+        }
 
-    /* Header & Dark Mode Toggle */
-    header {
-        background: var(--card-bg);
-        padding: 15px 0;
-        text-align: center;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-        position: sticky; top: 0; z-index: 1000;
-        display: flex; flex-direction: column; align-items: center;
-    }
+        .logo-box img { width: 160px; height: auto; }
 
-    .dark-mode-btn {
-        position: absolute; right: 20px; top: 25px;
-        background: var(--main-blue); color: white;
-        border: none; padding: 8px 15px; border-radius: 50px;
-        cursor: pointer; font-family: 'Cairo'; font-weight: bold;
-    }
+        .main-container { max-width: 1000px; margin: 0 auto; padding: 20px; }
 
-    .logo-box img { width: 140px; height: auto; }
+        /* Hero */
+        .hero { text-align: center; margin-bottom: 50px; }
+        .hero h1 { font-size: 2.2rem; font-weight: 900; color: var(--main-blue); margin-bottom: 10px; }
+        .slogan-pill {
+            background: #e0f2fe; padding: 10px 25px; border-radius: 50px;
+            display: inline-block; font-size: 1rem; color: #0369a1; font-weight: bold;
+        }
 
-    .main-container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        /* Search */
+        .search-box {
+            width: 100%; max-width: 500px; display: block; margin: 0 auto 40px;
+            padding: 18px 25px; border-radius: 20px; border: 2px solid #cbd5e1;
+            font-family: 'Cairo'; font-size: 1.1rem; outline: none; text-align: center;
+        }
+        .search-box:focus { border-color: var(--main-blue); box-shadow: 0 0 20px rgba(0, 168, 255, 0.1); }
 
-    /* Hero */
-    .hero { text-align: center; margin-bottom: 50px; }
-    .hero h1 { font-size: 2.2rem; font-weight: 900; color: var(--main-blue); margin-bottom: 10px; }
-    .slogan-pill {
-        background: #e0f2fe; padding: 10px 25px; border-radius: 50px;
-        display: inline-block; font-size: 1rem; color: #0369a1; font-weight: bold;
-    }
+        /* Schedule Card & Watermark كدسه */
+        .schedule-card {
+            background: white; border-radius: 30px; padding: 25px; margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; text-align: center;
+        }
 
-    /* Search */
-    .search-box {
-        width: 100%; max-width: 500px; display: block; margin: 0 auto 40px;
-        padding: 18px 25px; border-radius: 20px; border: 2px solid #cbd5e1;
-        font-family: 'Cairo'; font-size: 1.1rem; outline: none; text-align: center;
-        background: var(--card-bg); color: var(--text-color);
-    }
+        .card-header { margin-bottom: 20px; }
+        .card-header h3 { font-size: 1.8rem; margin: 0; color: #0f172a; }
+        .card-header span { color: var(--accent-purple); font-weight: bold; font-size: 0.9rem; }
 
-    /* Schedule Card */
-    .schedule-card {
-        background: var(--card-bg); border-radius: 30px; padding: 25px; margin-bottom: 40px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; text-align: center;
-    }
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            border-radius: 20px;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
 
-    .img-wrapper {
-        position: relative; cursor: pointer; border-radius: 20px;
-        overflow: hidden; display: inline-block; width: 100%;
-    }
-    .img-wrapper img { width: 100%; display: block; }
+        .img-wrapper img { width: 100%; display: block; }
 
-    /* Rating Stars كدسه */
-    .rating-section { margin-top: 15px; direction: ltr; }
-    .star { font-size: 25px; cursor: pointer; color: #cbd5e1; transition: 0.2s; }
-    .star.active { color: #ffca08; }
-    .rating-text { font-size: 0.9rem; margin-top: 5px; font-weight: bold; color: var(--main-blue); }
+        /* العلامة المائية كدسه */
+        .img-wrapper::after {
+            content: "عا الهادي | kemo-omar.3alhady ";
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            pointer-events: none;
+            backdrop-filter: blur(4px);
+        }
 
-    /* Footer */
-    footer { background: #0f172a; color: #f8fafc; padding: 60px 20px; text-align: center; margin-top: 80px; }
-    .signature { font-weight: bold; color: var(--main-blue); margin-top: 20px; font-size: 1.1rem; }
-    
-    @media (max-width: 600px) {
-        .hero h1 { font-size: 1.7rem; }
-        .dark-mode-btn { position: relative; right: 0; top: 10px; margin-bottom: 10px; }
-    }
-</style>
+        .img-wrapper:hover img { transform: scale(1.02); filter: brightness(0.95); }
+        .img-wrapper:hover::before {
+            content: "اضغط للتحميل";
+            position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: var(--main-blue); color: white;
+            padding: 10px 20px; border-radius: 12px; z-index: 2; font-weight: bold;
+        }
 
+        /* Footer */
+        footer { background: #0f172a; color: #f8fafc; padding: 60px 20px; text-align: center; margin-top: 80px; }
+        .legal-msg {
+            background: rgba(248, 113, 113, 0.1); color: #f87171;
+            padding: 25px; border-radius: 20px; font-size: 0.9rem;
+            max-width: 800px; margin: 0 auto 40px; border: 1px solid rgba(248, 113, 113, 0.2);
+            line-height: 1.8; text-align: justify;
+        }
+        .signature { font-weight: bold; color: var(--main-blue); margin-top: 20px; font-size: 1.1rem; }
+        
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.7rem; }
+            .schedule-card { padding: 15px; }
+        }
+    </style>
 </head>
 <body>
 
     <header>
-        <button class="dark-mode-btn" onclick="toggleDarkMode()">🌙 المود الرايق</button>
         <div class="logo-box">
             <a href="index.html"><img src="3a1.png" alt="لوجو عا الهادي" onerror="this.src='https://kemo-omar.github.io/3alhady/3a1.png'"></a>
         </div>
@@ -382,9 +398,14 @@
     </div>
 
     <footer>
-        <p style="color: var(--main-blue); font-weight: bold; margin-bottom: 20px;">
-            🔥 دخل الموقع ده <span id="viewCountDisplay">...</span> بطل لحد دلوقتي كدسه
-        </p>
+        <div class="legal-msg">
+            <strong>⚠️ إخلاء مسؤولية قانوني:</strong> موقع "عا الهادي" هو مبادرة طلابية مستقلة تهدف لتيسير الوصول للجداول التعليمية وتنسيقها بشكل مريح للعين. نحن لا نمثل وزارة التربية والتعليم المصرية ولا ندعي الصفة الرسمية. يتم تجميع هذه الجداول من المصادر المتاحة، لذا يجب على كل طالب التأكد من "الجدول الورقي" المعتمد داخل مدرسته قبل موعد الامتحان بـ 48 ساعة على الأقل. الموقع غير مسؤول عن أي أخطاء مطبعية أو تغييرات مفاجئة في مواعيد الامتحانات تقرها الإدارات التعليمية.
+        </div>
+        <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 5px;">﴿هدفي بوضوح: تخليصك من دوشة الجداول عشان تذاكر وإنت عا الهادي كدسه﴾</p>
+       <p style="color: #main-blue; font-weight: bold; margin-top: 20px;">
+    🔥 دخل الموقع ده <span id="viewCountDisplay">...</span> بطل لحد دلوقتي كدسه
+       </p>
+
         <div class="signature">برمجة وتطوير بواسطة: كريم عمر سيد 👨‍💻</div>
         <p style="color: #64748b; font-size: 0.8rem; margin-top: 30px;">جميع الحقوق محفوظة لموقع عا الهادي © 2026</p>
     </footer>
@@ -406,100 +427,124 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // --- نظام التقييم كدسه ---
-    window.rate = async function(stars) {
-        // حماية كدسه: أقل تقييم يتبعت 4.5
-        const actualRating = stars < 4.5 ? 4.8 : stars;
-        const statsRef = doc(db, "stats", "ratings");
-        
-        try {
-            await updateDoc(statsRef, {
-                totalPoints: increment(actualRating),
-                count: increment(1)
-            });
-            alert("تسلم يا بطل على التقييم الرايق! ❤️");
-            location.reload(); // تحديث لعرض النجوم الجديدة
-        } catch (e) {
-            await setDoc(statsRef, { totalPoints: actualRating, count: 1 });
-        }
-    }
-
-    async function displayRating() {
-        const statsRef = doc(db, "stats", "ratings");
-        const snap = await getDoc(statsRef);
-        let finalRating = 5;
-        if (snap.exists()) {
-            finalRating = (snap.data().totalPoints / snap.data().count).toFixed(1);
-        }
-        // التأكد برمجياً إن العرض ميقلش عن 4.5 كدسه
-        if(finalRating < 4.5) finalRating = 4.7;
-
-        const ratingHTML = `
-            <div class="rating-section">
-                ${[1, 2, 3, 4, 5].map(i => `<span class="star ${i <= Math.round(finalRating) ? 'active' : ''}" onclick="rate(${i})">★</span>`).join('')}
-                <div class="rating-text">تقييم الأبطال: ${finalRating} من 5</div>
-            </div>
-        `;
-        document.querySelector('.hero').innerHTML += ratingHTML;
-    }
-
-    // --- عداد الزيارات والوضع الليلي ---
-    window.toggleDarkMode = function() {
-        document.body.classList.toggle('dark-mode');
-        const isDark = document.body.classList.contains('dark-mode');
-        localStorage.setItem('darkMode', isDark);
-    }
-
+    // --- دالة عد الزيارات كدسه (الجديدة) ---
     async function trackVisits() {
         const statsRef = doc(db, "stats", "visitorCount");
         try {
             await updateDoc(statsRef, { views: increment(1) });
             const snap = await getDoc(statsRef);
-            if (snap.exists()) document.getElementById('viewCountDisplay').innerText = snap.data().views;
+            if (snap.exists()) {
+                const countDisplay = document.getElementById('viewCountDisplay');
+                if(countDisplay) countDisplay.innerText = snap.data().views;
+            }
         } catch (e) {
             await setDoc(statsRef, { views: 1 });
+            const countDisplay = document.getElementById('viewCountDisplay');
+            if(countDisplay) countDisplay.innerText = "1";
         }
     }
+    // --------------------------------------
 
     const grid = document.getElementById('schedulesGrid');
     const loader = document.getElementById('loader');
+    const searchInput = document.getElementById('govSearch'); // عرفنا خانة البحث كدسه
     let schedules = [];
 
+    // دالة التحميل من فايرباز
     async function loadData() {
         try {
             const q = query(collection(db, "schedules"), orderBy("createdAt", "desc"));
             const snap = await getDocs(q);
             loader.style.display = 'none';
-            schedules = [];
+            schedules = []; // تصفية المصفوفة قبل التعبئة
             snap.forEach(doc => schedules.push(doc.data()));
             render(schedules);
-        } catch (e) { loader.innerText = "في مشكلة في التحميل كدسه.."; }
+        } catch (e) { 
+            console.error(e);
+            loader.innerText = "في مشكلة في التحميل كدسه.. جرب رفرش!";
+        }
     }
 
+    // دالة العرض في الصفحة
     function render(data) {
         grid.innerHTML = '';
+        if (data.length === 0) {
+            grid.innerHTML = '<p style="text-align:center; color:#94a3b8;">مفيش جداول بالاسم ده كدسه..</p>';
+            return;
+        }
         data.forEach(item => {
             const imgUrl = `https://kemo-omar.github.io/3alhady/${item.imageName}`;
+            const fallbackUrl = `https://kemo-omar.github.io/3alhady/${item.imageName}`;
+            
             grid.innerHTML += `
                 <div class="schedule-card">
-                    <h3>محافظة ${item.govName}</h3>
-                    <div class="img-wrapper" onclick="window.downloadImg('${imgUrl}', '${item.govName}')">
-                        <img src="${imgUrl}" loading="lazy">
+                    <div class="card-header">
+                        <h3>محافظة ${item.govName}</h3>
+                        <span>ستايل: ${item.styleName}</span>
                     </div>
+                    <div class="img-wrapper" onclick="window.downloadImg('${imgUrl}', '${item.govName}')">
+                        <img src="${imgUrl}" 
+                             alt="${item.fullDescription}" 
+                             title="${item.fullDescription}" 
+                             loading="lazy"
+                             onerror="this.onerror=null; this.src='${fallbackUrl}'">
+                    </div>
+                    <p style="color:#94a3b8; font-size:0.85rem; margin-top:15px; font-weight:bold;">${item.fullDescription}</p>
                 </div>
             `;
         });
     }
 
-    // استعادة وضع المود الرايق
-    if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
+    // دالة التحميل الذكية كدسه
+    window.downloadImg = function(url, name) {
+        const img = new Image();
+        img.crossOrigin = "anonymous"; // عشان نتفادى مشاكل الـ CORS كدسه
+        img.src = url;
+        
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // ضبط أبعاد الكانفاس لتناسب الصورة الأصلية
+            canvas.width = img.width;
+            canvas.height = img.height;
+            
+            // رسم الصورة الأصلية
+            ctx.drawImage(img, 0, 0);
+            
+            // إعدادات العلامة المائية كدسه
+            const fontSize = Math.floor(canvas.width / 40); // حجم الخط متناسق مع حجم الصورة
+            ctx.font = `bold ${fontSize}px Cairo`;
+            ctx.fillStyle = "rgba(255, 255, 255, 0.7)"; // لون أبيض شفاف
+            ctx.textAlign = "left";
+            
+            // رسم النص (العلامة المائية) في الركن تحت عالشمال
+            ctx.fillText("عا الهادي | kemo-omar.3alhady", 20, canvas.height - 20);
+            
+            // تنفيذ التحميل كدسه
+            const link = document.createElement('a');
+            link.download = `جدول_${name}_عا_الهادي.png`;
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        };
+        
+        img.onerror = function() {
+            // لو حصل مشكلة في الرسم، حمل الصورة العادية كدسه
+            window.open(url, '_blank');
+        };
+    }
 
-    trackVisits();
-    displayRating();
+    // تشغيل البحث كدسه
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.trim().toLowerCase();
+        const filtered = schedules.filter(s => s.govName.includes(term));
+        render(filtered);
+    });
+
+    // تشغيل تحميل البيانات فور فتح الموقع
+    trackVisits(); // تشغيل عداد الزيارات كدسه
     loadData();
 
-    // دالة التحميل (نفس كودك الأصلي للتحميل بالواتر مارك)
-    window.downloadImg = function(url, name) { /* كود التحميل بالكانفاس الخاص بك */ }
 </script>
 
 
